@@ -11,11 +11,11 @@ async def start(c, m):
     # start text
     text = f"""Hey! {m.from_user.mention(style='md')},
 
-💡 ** I am Telegram ShowJson Bot**
+💡  I am Telegram ShowJson Bot
 
-`Get the json for the text, media, etc.`
+Get the json for the text, media, etc.
 
-**👲 Maintained By:** {owner.mention(style='md')}
+👲 Maintained By: {owner.mention(style='md')}
 """
 
     # Buttons
@@ -23,8 +23,13 @@ async def start(c, m):
         [
             InlineKeyboardButton('My Father 👨‍✈️', url=f"https://t.me/{owner_username}")
         ]
+    ] ,
+[
+        [
+            InlineKeyboardButton('My Father 👨‍✈️', url=f"https://t.me/tellybots_support}")
+        ]
     ]
-    await m.reply_text(
+await m.reply_text(
         text=text,
         reply_markup=InlineKeyboardMarkup(buttons)
     )
@@ -33,7 +38,7 @@ async def start(c, m):
 
 @Client.on_message(filters.private & filters.incoming)
 async def show_json(c, m):
-    text = f'`{m}`'
+    text = f'{m}'
     if len(text) <= 4096:
         await m.reply_text(text)
     else:
@@ -44,7 +49,7 @@ async def show_json(c, m):
 
 @Client.on_inline_query()
 async def inline_json(c, m):
-    text = f'`{m}`'
+    text = f'{m}'
     if len(text) <= 4096:
         await c.send_message(chat_id=m.from_user.id, text=text)
     else:
