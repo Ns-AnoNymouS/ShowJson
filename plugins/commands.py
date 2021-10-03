@@ -6,24 +6,27 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 @Client.on_message(filters.command('start'))
 async def start(c, m):
     owner = await c.get_users(int(Config.OWNER_ID))
-    owner_username = owner.username if owner.username else 'Ns_bot_updates'
+    owner_username = owner.username if owner.username else 'Tellybots_4u'
 
     # start text
     text = f"""Hey! {m.from_user.mention(style='md')},
 
-💡 ** I am Telegram ShowJson Bot**
+💡  I am Telegram ShowJson Bot
 
-`Get the json for the text, media, etc.`
+Send Msg by own or forward msg from channel to get json details.
 
-**👲 Maintained By:** {owner.mention(style='md')}
+Developed by: {owner.mention(style='md')}
 """
 
     # Buttons
     buttons = [
         [
-            InlineKeyboardButton('My Father 👨‍✈️', url=f"https://t.me/{owner_username}")
+            InlineKeyboardButton('Developer', url=f"https://t.me/{owner_username}")
         ]
-    ]
+[
+            InlineKeyboardButton('Support Group', url=f"https://tellybots_support")
+        ]
+]
     await m.reply_text(
         text=text,
         reply_markup=InlineKeyboardMarkup(buttons)
@@ -33,7 +36,7 @@ async def start(c, m):
 
 @Client.on_message(filters.private & filters.incoming)
 async def show_json(c, m):
-    text = f'`{m}`'
+    text = f'{m}'
     if len(text) <= 4096:
         await m.reply_text(text)
     else:
@@ -44,7 +47,7 @@ async def show_json(c, m):
 
 @Client.on_inline_query()
 async def inline_json(c, m):
-    text = f'`{m}`'
+    text = f'{m}'
     if len(text) <= 4096:
         await c.send_message(chat_id=m.from_user.id, text=text)
     else:
@@ -55,6 +58,6 @@ async def inline_json(c, m):
 
     await m.answer(
         results=[],
-        switch_pm_text=f"Hey i sent the json in PM 😉",
+        switch_pm_text=f"Hi I sent Json in pm",
         switch_pm_parameter="start",
     )
