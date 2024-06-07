@@ -30,5 +30,5 @@ Click the "Deploy to Heroku" button and provide values for the config vars.
 
 - **Name**: Anonymous
 - **Skills**: Python, Machine Learning, Web Development
-- **Telegram**: [@Ns_Anonymous](https://telegram.dog/Ns_Anonymous)
+- **Telegram**: [@The_proGrammerr](https://telegram.dog/The_proGrammerr)
 - **GitHub**: [Ns-AnoNymouS](https://github.com/Ns-AnoNymouS)
