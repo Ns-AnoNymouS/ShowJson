@@ -1,48 +1,43 @@
 {
   "name": "ShowJson",
-  "description": "Telegram ShowJson helps to get the json text. Create your Fork now.",
+  "description": "Telegram ShowJson Bot: Get JSON text easily.",
   "keywords": [
     "telegram",
-    "best",
-    "Json"
+    "json",
+    "bot"
   ],
   "logo": "https://telegra.ph/file/b203e2d0485aed4ecb1de.jpg",
-  "success_url": "https://telegram.dog/ShowJson_Nsbot",
+  "success_url": "https://telegram.dog/ShowJson_Xbot",
   "website": "https://github.com/Ns-Bots/ShowJson",
   "repository": "https://github.com/Ns-Bots/ShowJson",
   "env": {
-    "WEBHOOK": {
-      "description": "Setting this to ANYTHING will enable webhooks when in env mode",
-      "value": "ANYTHING"
-    },
     "BOT_TOKEN": {
-      "description": "Your bot token, as a string.",
+      "description": "Your Telegram bot token.",
       "value": ""
     },
     "API_ID": {
-      "description": "Get this value from https://my.telegram.org",
+      "description": "Your Telegram API ID. Get it from https://my.telegram.org",
       "value": ""
     },
     "OWNER_ID": {
-      "description": "give your telegram user id here",
+      "description": "Your Telegram user ID.",
       "value": ""
     },
     "API_HASH": {
-      "description": "Get this value from https://my.telegram.org",
+      "description": "Your Telegram API hash. Get it from https://my.telegram.org",
       "value": ""
     }
   },
-  "addons": [
+  "addons": [],
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
   ],
-  "buildpacks": [{
-    "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
-  }, {
-    "url": "heroku/python"
-  }],
   "formation": {
     "worker": {
       "quantity": 1,
-      "size": "free"
+      "size": "Eco"
     }
   }
 }
