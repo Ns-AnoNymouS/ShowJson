@@ -11,6 +11,7 @@ import logging
 
 from pyrogram import Client, filters
 from pyrogram.types import Message, InlineQuery
+from pyrogram.errors import UserIsBlocked, PeerIdInvalid
 
 logger = logging.getLogger(__name__)
 
@@ -51,25 +52,32 @@ async def inline_json(client: Client, inlinequery: InlineQuery):
         inlinequery (InlineQuery): The incoming inline query.
     """
     try:
-        text = f"`{inlinequery}`"
-        if len(text) <= 4096:
-            # If the JSON text is small enough, send a private message with the JSON text
-            await client.send_message(chat_id=inlinequery.from_user.id, text=text)
-        else:
-            # If the JSON text is too large, write it to a file and send the file
-            file_name = f"Your_json_file_{inlinequery.from_user.first_name}.json"
-            with open(file_name, "w", encoding="utf-8") as file:
-                file.write(text)
-            await client.send_document(
-                chat_id=inlinequery.from_user.id,
-                document=file_name,
-                caption="Here is your JSON file.",
-            )
-            os.remove(file_name)
+        try:
+            switch_pm_text = "Hey i sent the json in PM 😉"
+            text = f"`{inlinequery}`"
+            if len(text) <= 4096:
+                # If the JSON text is small enough, send a private message with the JSON text
+                await client.send_message(chat_id=inlinequery.from_user.id, text=text)
+            else:
+                # If the JSON text is too large, write it to a file and send the file
+                file_name = f"Your_json_file_{inlinequery.from_user.first_name}.json"
+                with open(file_name, "w", encoding="utf-8") as file:
+                    file.write(text)
+                await client.send_document(
+                    chat_id=inlinequery.from_user.id,
+                    document=file_name,
+                    caption="Here is your JSON file.",
+                )
+                os.remove(file_name)
+        except UserIsBlocked:
+            switch_pm_text = "You have Blocked the bot,Unblock it "
+        except PeerIdInvalid:
+            switch_pm_text = "Please start the bot once in pm and try again"
+
         # Answer the inline query with a prompt to check their private messages
         await inlinequery.answer(
             results=[],
-            switch_pm_text="Hey, I sent the JSON in PM 😉",
+            switch_pm_text=switch_pm_text,
             switch_pm_parameter="start",
         )
     except Exception as e:  # pylint: disable = broad-exception-caught
